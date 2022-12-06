@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "vimetronome"
+version = "0.1.0"
+description = "Visual metronome"
+authors = ["d10n <d10n@redhat.com>"]
+readme = "README.md"
+packages = [{include = "vimetronome", from = "src"}]
+
+[tool.poetry.scripts]
+vimetronome = 'vimetronome.cli:main'
+
+[tool.poetry.dependencies]
+python = "^3.10"
+colored = "^1.4.4"
+docopt = "^0.6.2"
+schema = "^0.7.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
