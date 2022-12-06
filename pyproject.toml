@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "vimetronome"
-version = "0.1.0"
+version = "0.1.1"
 description = "Visual metronome"
 authors = ["d10n <d10n@redhat.com>"]
 readme = "README.md"

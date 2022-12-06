@@ -8,7 +8,7 @@ Usage:
   vimetronome <bpm>
   vimetronome (--help | --version)
 """
-
+import signal
 import sys
 import time
 from schema import Schema, SchemaError, Use
@@ -18,6 +18,7 @@ from vimetronome.metronome import Metronome
 
 
 def main():
+    handle_signals()
     args = parse_args()
     seconds = 60. / args['<bpm>']
     m = Metronome()
@@ -28,13 +29,19 @@ def main():
 
 
 def parse_args() -> dict:
-    args = docopt(sys.modules[__name__].__doc__, version='0.1.0')
+    args = docopt(sys.modules[__name__].__doc__, version='0.1.1')
     schema = Schema({'<bpm>': Use(int)}, ignore_extra_keys=True)
     try:
         args = schema.validate(args)
     except SchemaError as e:
         exit(e)
     return args
+
+
+def handle_signals():
+    def signal_handler(sig, frame):
+        sys.exit(0)
+    signal.signal(signal.SIGINT, signal_handler)
 
 
 if __name__ == '__main__':
